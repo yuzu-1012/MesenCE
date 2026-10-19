@@ -109,7 +109,7 @@ python3 tools/localization/xmltool.py merge zh-CN
 ```bash
 git clone https://github.com/yuzu-1012/MesenCE.git
 cd MesenCE
-git checkout zh-v3
+git checkout zh-v3b1
 cd packaging/arch
 updpkgsums
 makepkg -si

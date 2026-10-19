@@ -3,9 +3,9 @@
 # 先推送对应 tag，再在 packaging/arch 下执行 makepkg；否则请用 build-from-checkout.sh。
 
 pkgname=mesen-ce-zh
-pkgver=2.2.1.r99.g4b8a196e.zh3
+pkgver=2.2.1.r99.g4b8a196e.zh3b1
 pkgrel=1
-_tag=zh-v3
+_tag=zh-v3b1
 
 pkgdesc='MesenCE with Simplified Chinese localization (AOT, local build)'
 arch=('x86_64')
@@ -46,7 +46,7 @@ source=(
   "MesenCE-${_tag}.tar.gz::https://github.com/yuzu-1012/MesenCE/archive/refs/tags/${_tag}.tar.gz"
 )
 # 首次推送 tag 后执行 updpkgsums 换成真实校验和。
-sha256sums=('ad12396359c13a2300506f985b65b23e14749e760f7fca30696680063954dd80')
+sha256sums=('SKIP')
 
 prepare() {
   cd "MesenCE-${_tag}"
