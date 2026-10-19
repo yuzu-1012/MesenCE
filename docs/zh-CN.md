@@ -1,6 +1,6 @@
 # MesenCE 简体中文版：构建、安装与恢复
 
-这个 fork 在 [nezdev-org/MesenCE](https://github.com/nesdev-org/MesenCE) 的基础上加入了运行时可切换的本地化支持，并附带简体中文翻译。
+这个 fork 在 [nesdev-org/MesenCE](https://github.com/nesdev-org/MesenCE) 的基础上加入了运行时可切换的本地化支持，并附带简体中文翻译。
 
 - 上游版本：`2.2.1-99-g4b8a196e`（`net10.0`）
 - 本地化：`Auto` / `English` / `简体中文`
