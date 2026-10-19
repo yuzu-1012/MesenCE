@@ -2521,6 +2521,11 @@ E
 			<Value ID="Light">Light</Value>
 			<Value ID="Dark">Dark</Value>
 		</Enum>
+		<Enum ID="MesenLanguage">
+			<Value ID="Auto">Follow system</Value>
+			<Value ID="English">English</Value>
+			<Value ID="ChineseSimplified">Chinese (Simplified)</Value>
+		</Enum>
 		<Enum ID="SnesHighResBlendMode">
 			<Value ID="None">None (default)</Value>
 			<Value ID="BlendAll">Blend entire screen</Value>

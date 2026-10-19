@@ -22,6 +22,7 @@ namespace Mesen.Config
 	public partial class PreferencesConfig : BaseConfig<PreferencesConfig>
 	{
 		[ObservableProperty] public partial MesenTheme Theme { get; set; } = MesenTheme.Light;
+		[ObservableProperty] public partial MesenLanguage Language { get; set; } = MesenLanguage.Auto;
 		[ObservableProperty] public partial bool AutomaticallyCheckForUpdates { get; set; } = true;
 		[ObservableProperty] public partial bool SingleInstance { get; set; } = true;
 		[ObservableProperty] public partial bool AutoLoadPatches { get; set; } = true;
@@ -257,6 +258,13 @@ namespace Mesen.Config
 	{
 		Light = 0,
 		Dark = 1
+	}
+
+	public enum MesenLanguage
+	{
+		Auto = 0,
+		English = 1,
+		ChineseSimplified = 2
 	}
 
 	public enum FontAntialiasing
