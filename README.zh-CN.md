@@ -14,7 +14,7 @@
 ```bash
 git clone https://github.com/yuzu-1012/MesenCE.git
 cd MesenCE
-git checkout zh-v2
+git checkout zh-v3
 
 cd packaging/arch
 updpkgsums
@@ -38,7 +38,7 @@ mesen-ce-zh
 python3 tools/localization/xmltool.py stats zh-CN
 ```
 
-当前进度以该命令输出为准。M1/M2 已完成主菜单、设置、视频/音频、各机种配置、输入/控制器配置、关于、初始向导、常用弹窗和快捷键等核心界面；调试器界面仍为英文。未翻译的条目在运行时自动回退英文，不会出现空白或 `[[key]]`。
+当前进度以该命令输出为准。M1/M2/M3a 已完成主菜单、设置、视频/音频、各机种配置、输入/控制器配置、调试器主界面/设置/快捷键、关于、初始向导、常用弹窗等核心界面；调试器中的内存/断点/图块/脚本等细节仍为英文。未翻译的条目在运行时自动回退英文，不会出现空白或 `[[key]]`。
 
 ## 目录
 
