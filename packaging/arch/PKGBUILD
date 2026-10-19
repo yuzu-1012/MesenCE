@@ -46,7 +46,7 @@ source=(
   "MesenCE-${_tag}.tar.gz::https://github.com/yuzu-1012/MesenCE/archive/refs/tags/${_tag}.tar.gz"
 )
 # 首次推送 tag 后执行 updpkgsums 换成真实校验和。
-sha256sums=('SKIP')
+sha256sums=('7189304bcf85c1d060e423949f41c5221395967b84baf59bdc1269936a78b43d')
 
 prepare() {
   cd "MesenCE-${_tag}"
