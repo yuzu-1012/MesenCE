@@ -1,0 +1,95 @@
+# Maintainer: yuzu-1012 <yuzu-1012@users.noreply.github.com>
+# 本地自用包：从 fork 的 tag 构建 AOT 自包含版本。
+# 先推送对应 tag，再在 packaging/arch 下执行 makepkg；否则请用 build-from-checkout.sh。
+
+pkgname=mesen-ce-zh
+pkgver=2.2.1.r99.g4b8a196e.zh1
+pkgrel=1
+_tag=zh-v1
+
+pkgdesc='MesenCE with Simplified Chinese localization (AOT, local build)'
+arch=('x86_64')
+url='https://github.com/yuzu-1012/MesenCE'
+license=('GPL-3.0-or-later')
+
+# AOT 自包含版本不需要 dotnet-runtime。
+# 这些是实际运行需要的库：Avalonia 的 X11 后端、Skia 字体、SDL2 音频、libevdev 手柄。
+depends=(
+  'glibc'
+  'gcc-libs'
+  'sdl2'
+  'libevdev'
+  'fontconfig'
+  'glib2'
+  'libx11'
+  'libxcursor'
+  'libxext'
+  'libxi'
+  'libxrandr'
+  'libglvnd'
+  'icu'
+  'zlib'
+)
+
+makedepends=(
+  'clang'
+  'dotnet-sdk-10.0'
+  'pkgconf'
+  'zlib'
+  'binutils'
+)
+
+optdepends=('noto-fonts-cjk: CJK font for Chinese text')
+options=(!strip !debug)
+
+source=(
+  "MesenCE-${_tag}.tar.gz::https://github.com/yuzu-1012/MesenCE/archive/refs/tags/${_tag}.tar.gz"
+)
+# 首次推送 tag 后执行 updpkgsums 换成真实校验和。
+sha256sums=('SKIP')
+
+prepare() {
+  cd "MesenCE-${_tag}"
+
+  # 让 .desktop 的 Exec/Icon 与安装后的名字一致
+  sed -i \
+    -e 's|^Exec=Mesen|Exec=mesen-ce-zh|' \
+    -e 's|^Icon=Mesen|Icon=mesen-ce-zh|' \
+    Linux/appimage/Mesen.desktop
+
+  # 如果未来 clang 因 -Werror 构建失败，取消下一行注释：
+  # sed -i 's/ -Werror / /' makefile
+}
+
+build() {
+  cd "MesenCE-${_tag}"
+
+  export DOTNET_CLI_TELEMETRY_OPTOUT=1
+  export DOTNET_NOLOGO=1
+  export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
+  export DOTNET_CLI_HOME="$srcdir/.dotnet"
+  export NUGET_PACKAGES="$srcdir/.nuget"
+  export NUGET_HTTP_CACHE_PATH="$srcdir/.nuget-http-cache"
+
+  # AOT + 自包含：产物不依赖系统的 dotnet-runtime。
+  make USE_AOT=true LTO=true STATICLINK=false SYSTEM_LIBEVDEV=true
+}
+
+package() {
+  cd "MesenCE-${_tag}"
+
+  # AOT 产物在 bin/linux-x64/Release/linux-x64/publish/Mesen。
+  # MesenCore.so / libSkiaSharp.so / libHarfBuzzSharp.so 由应用从内嵌的
+  # Dependencies.zip 解压到 ~/.config/MesenCE，因此这里只装主程序。
+  install -Dm755 'bin/linux-x64/Release/linux-x64/publish/Mesen' \
+    "$pkgdir/usr/bin/mesen-ce-zh"
+
+  install -Dm644 'Linux/appimage/Mesen.desktop' \
+    "$pkgdir/usr/share/applications/mesen-ce-zh.desktop"
+
+  install -Dm644 'Linux/appimage/Mesen.48x48.png' \
+    "$pkgdir/usr/share/icons/hicolor/48x48/apps/mesen-ce-zh.png"
+
+  install -Dm644 'LICENSE' \
+    "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
