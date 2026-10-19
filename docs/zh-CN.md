@@ -20,6 +20,8 @@ sudo pacman -S --needed \
 
 ## 2. 从 tag 构建并安装（推荐）
 
+> 说明：源码 tag 里也包含这个 `PKGBUILD`，所以 tag 内的 `sha256sums` 只能是 `SKIP`（tarball 的校验和无法写进 tarball 自身）。checkout tag 后先运行 `updpkgsums` 生成校验和；`zh-cn` 分支上的 PKGBUILD 已经记录了 `zh-v1` 的校验和。
+
 先确保对应的 tag 已经推送到 GitHub：
 
 ```bash
