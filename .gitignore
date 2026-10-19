@@ -200,5 +200,5 @@ packaging/arch/build-output/
 /.nuget-http-cache/
 /.dotnet/
 packaging/arch/*.tar.gz
-packaging/arch/.makepkg.log
+packaging/arch/.makepkg*.log
 packaging/arch/.pkg-test/
